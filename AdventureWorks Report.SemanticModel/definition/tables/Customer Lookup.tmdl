@@ -1,0 +1,238 @@
+table 'Customer Lookup'
+	excludeFromModelRefresh
+	lineageTag: 36ff9624-1413-4214-a616-e96add2ed0d6
+
+	column CustomerKey
+		dataType: int64
+		isKey
+		formatString: 0
+		lineageTag: bd44b33d-081a-4c5c-a2e9-efd7cde11437
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prefix
+		dataType: string
+		lineageTag: db5c07dc-afc7-40ef-a5b9-0886fd66d18b
+		summarizeBy: none
+		sourceColumn: Prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstName
+		dataType: string
+		lineageTag: 5473d2f7-2650-4f73-bd4e-deb87bd39a48
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastName
+		dataType: string
+		lineageTag: 4aa90045-6bdf-46cd-b77b-01b194b01748
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	column BirthDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1a0de81b-b970-4973-a600-c15c0c1242e4
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MaritalStatus
+		dataType: string
+		lineageTag: 5f85d24f-fb66-4737-a8f4-ae3429604494
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 00bb947c-8c29-477d-8b59-a69faf08b28e
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 8152b2c4-d241-4fd8-91e2-a06114a00edc
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnnualIncome
+		dataType: int64
+		formatString: 0
+		lineageTag: d55a7be4-7917-4c8b-9ad2-7051b564fc6a
+		summarizeBy: none
+		sourceColumn: AnnualIncome
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalChildren
+		dataType: int64
+		formatString: 0
+		lineageTag: d4c4d0e8-850d-410c-9a83-3a82e70115bb
+		summarizeBy: none
+		sourceColumn: TotalChildren
+
+		annotation SummarizationSetBy = Automatic
+
+	column EducationLevel
+		dataType: string
+		lineageTag: dbe17915-6453-449f-b3e4-95addab59a76
+		summarizeBy: none
+		sourceColumn: EducationLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: d0ca365b-3d8d-4daa-a329-a8e18abc88c6
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column HomeOwner
+		dataType: string
+		lineageTag: 3dda703c-47cc-4e17-933f-09dc8910ecf2
+		summarizeBy: none
+		sourceColumn: HomeOwner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: 813e5684-d9c7-4e47-9e22-32498466706b
+		summarizeBy: none
+		sourceColumn: Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Domain Name'
+		dataType: string
+		lineageTag: 28ece6c3-0a14-4c92-8d44-2aefb6498c65
+		summarizeBy: none
+		sourceColumn: Domain Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Parent =
+			
+			IF(
+			    'Customer Lookup'[TotalChildren] > 0,
+			    "Yes",
+			    "No"
+			)
+		dataType: string
+		lineageTag: 2ea370b1-792e-4a28-9156-525e2c5b1119
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Priority' = ```
+			
+			IF('Customer Lookup'[AnnualIncome] > 100000 && 'Customer Lookup'[Parent] = "Yes", 
+			        "Priority",
+			        "Standard"
+			)
+			```
+		dataType: string
+		lineageTag: 18f9ca44-1420-4a13-b3d1-0413f023832a
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Income Level' =
+			
+			SWITCH(
+			    TRUE(),
+			    'Customer Lookup'[AnnualIncome] > 150000, "Very High",
+			    'Customer Lookup'[AnnualIncome] > 100000, "High",
+			    'Customer Lookup'[AnnualIncome] > 50000, "Average",
+			    "Low"
+			)
+		dataType: string
+		lineageTag: d354a426-edcf-4c65-980c-52d6c8dc0919
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Education Category' =
+			
+			SWITCH(
+			    'Customer Lookup'[EducationLevel],
+			        "Partial High School", "High School",
+			        "High School", "High School",
+			        "Partial College", "Undergrad",
+			        "Bachelors", "Undergrad",
+			        "Graduate Degree", "Graduate"
+			)
+		dataType: string
+		lineageTag: 5ea18178-7bba-4f92-a338-fd36a7a893bb
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Full Name' = ```
+			
+			'Customer Lookup'[Prefix] & " " & 'Customer Lookup'[FirstName] & " " & 'Customer Lookup'[LastName] 
+			```
+		dataType: string
+		lineageTag: 4fd7d9a1-f7a0-4ce1-99e9-298216bee478
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Birth Year' = ```
+			
+			YEAR(
+			    'Customer Lookup'[BirthDate]
+			)
+			
+			```
+		dataType: int64
+		formatString: 0
+		lineageTag: e3ceeb25-52c3-40cc-9f03-d59350df562c
+		summarizeBy: none
+		isDataTypeInferred
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Customer Lookup' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Bhushan\Desktop\Projects\AdventureWorks PBI Dashboard\Data\AdventureWorks Raw Data\AdventureWorks Customer Lookup.csv"),[Delimiter=",", Columns=13, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CustomerKey", Int64.Type}, {"Prefix", type text}, {"FirstName", type text}, {"LastName", type text}, {"BirthDate", type date}, {"MaritalStatus", type text}, {"Gender", type text}, {"EmailAddress", type text}, {"AnnualIncome", Int64.Type}, {"TotalChildren", Int64.Type}, {"EducationLevel", type text}, {"Occupation", type text}, {"HomeOwner", type text}}),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Changed Type", {"CustomerKey"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Errors", each [CustomerKey] <> null and [CustomerKey] <> ""),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Filtered Rows",{{"Prefix", Text.Proper, type text}, {"FirstName", Text.Proper, type text}, {"LastName", Text.Proper, type text}}),
+				    #"Inserted Full Name Column" = Table.AddColumn(#"Capitalized Each Word", "Full Name", each Text.Combine({[Prefix], [FirstName], [LastName]}, " "), type text),
+				    #"Inserted Domain Name column" = Table.AddColumn(#"Inserted Full Name Column", "Text Between Delimiters", each Text.BetweenDelimiters([EmailAddress], "@", "."), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Domain Name column",{{"Text Between Delimiters", "Domain Name"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","-"," ",Replacer.ReplaceText,{"Domain Name"}),
+				    #"Capitalized Each Word1" = Table.TransformColumns(#"Replaced Value",{{"Domain Name", Text.Proper, type text}})
+				in
+				    #"Capitalized Each Word1"
+
+	annotation PBI_ResultType = Table
+

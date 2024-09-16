@@ -1,0 +1,41 @@
+relationship ac23bd93-8972-571f-f51d-32d59bfd2ddc
+	fromColumn: 'Sales Data'.CustomerKey
+	toColumn: 'Customer Lookup'.CustomerKey
+
+relationship ee4bb29c-e54b-a636-ad8e-7b5491dbd2e7
+	fromColumn: 'Sales Data'.TerritoryKey
+	toColumn: 'Territory Lookup'.SalesTerritoryKey
+
+relationship aaefc2a6-a7e4-a9ec-481f-78a45711818f
+	fromColumn: 'Sales Data'.OrderDate
+	toColumn: 'Calendar Lookup'.Date
+
+relationship b753e1ff-24de-e3a3-dc1a-32595158613b
+	fromColumn: 'Sales Data'.ProductKey
+	toColumn: 'Product Lookup'.ProductKey
+
+relationship 869a64fc-811b-d251-24e8-6310dc823025
+	fromColumn: 'Product Lookup'.ProductSubcategoryKey
+	toColumn: 'Product Subcategories Lookup'.ProductSubcategoryKey
+
+relationship 4db0519e-bbe1-3055-c1b5-28dda56e6314
+	fromColumn: 'Product Subcategories Lookup'.ProductCategoryKey
+	toColumn: 'Product Categories Lookup'.ProductCategoryKey
+
+relationship b2d70fd6-5c26-6c68-bade-a6397eaa07c9
+	fromColumn: 'Returns Data'.TerritoryKey
+	toColumn: 'Territory Lookup'.SalesTerritoryKey
+
+relationship 4adb7ac7-1efa-d348-fe3b-f426af0d49f5
+	fromColumn: 'Returns Data'.ReturnDate
+	toColumn: 'Calendar Lookup'.Date
+
+relationship 0c27c3b5-2e60-8e2e-1f09-9a0f1b95e163
+	fromColumn: 'Returns Data'.ProductKey
+	toColumn: 'Product Lookup'.ProductKey
+
+relationship 7578cd01-c241-6331-d8e6-a89f7d1f2fa4
+	isActive: false
+	fromColumn: 'Sales Data'.StockDate
+	toColumn: 'Calendar Lookup'.Date
+

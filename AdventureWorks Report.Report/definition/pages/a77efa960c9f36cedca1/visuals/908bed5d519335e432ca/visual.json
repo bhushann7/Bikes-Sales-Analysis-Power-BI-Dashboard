@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "908bed5d519335e432ca",
+  "position": {
+    "height": 100.29850746268656,
+    "width": 971.64179104477557,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visualGroup": {
+    "displayName": "KPI Backgrounds",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "4f9b6b0d0e76300477c1"
+}

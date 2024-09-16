@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/1.0.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU06",
+      "reportVersionAtImport": "5.56",
+      "type": "SharedResources"
+    }
+  },
+  "layoutOptimization": "PhonePortrait",
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU06",
+          "path": "BaseThemes/CY24SU06.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "AdventureWorks_Logo3543889398975826.png",
+          "path": "AdventureWorks_Logo3543889398975826.png",
+          "type": "Image"
+        },
+        {
+          "name": "Dashboard_Icon24606130315210883.png",
+          "path": "Dashboard_Icon24606130315210883.png",
+          "type": "Image"
+        },
+        {
+          "name": "Dashboard_Icon_Blue07805403034329639.png",
+          "path": "Dashboard_Icon_Blue07805403034329639.png",
+          "type": "Image"
+        },
+        {
+          "name": "Dashboard_Icon_Blue34693493448581614.png",
+          "path": "Dashboard_Icon_Blue34693493448581614.png",
+          "type": "Image"
+        },
+        {
+          "name": "Map_Icon_Blue7194464228527702.png",
+          "path": "Map_Icon_Blue7194464228527702.png",
+          "type": "Image"
+        },
+        {
+          "name": "Map_Icon_Blue4738235562211168.png",
+          "path": "Map_Icon_Blue4738235562211168.png",
+          "type": "Image"
+        },
+        {
+          "name": "Map_Icon9384774931682087.png",
+          "path": "Map_Icon9384774931682087.png",
+          "type": "Image"
+        },
+        {
+          "name": "Product_Icon0686619891879019.png",
+          "path": "Product_Icon0686619891879019.png",
+          "type": "Image"
+        },
+        {
+          "name": "Product_Icon_Blue7728497664325815.png",
+          "path": "Product_Icon_Blue7728497664325815.png",
+          "type": "Image"
+        },
+        {
+          "name": "Product_Icon_Blue06704052265524862.png",
+          "path": "Product_Icon_Blue06704052265524862.png",
+          "type": "Image"
+        },
+        {
+          "name": "Customer_Icon5965092465792396.png",
+          "path": "Customer_Icon5965092465792396.png",
+          "type": "Image"
+        },
+        {
+          "name": "Customer_Icon_Blue7171339460076467.png",
+          "path": "Customer_Icon_Blue7171339460076467.png",
+          "type": "Image"
+        },
+        {
+          "name": "Customer_Icon_Blue9492936682270907.png",
+          "path": "Customer_Icon_Blue9492936682270907.png",
+          "type": "Image"
+        },
+        {
+          "name": "Filter_Icon18132285600587505.png",
+          "path": "Filter_Icon18132285600587505.png",
+          "type": "Image"
+        },
+        {
+          "name": "Filter_Icon_Blue07250123225914762.png",
+          "path": "Filter_Icon_Blue07250123225914762.png",
+          "type": "Image"
+        },
+        {
+          "name": "Filter_Icon_Blue020960996642641172.png",
+          "path": "Filter_Icon_Blue020960996642641172.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
+  }
+}

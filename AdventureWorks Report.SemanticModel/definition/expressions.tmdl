@@ -1,0 +1,58 @@
+expression 'Product Category Sales (Unpivot Demo)' =
+		let
+		    Source = Csv.Document(File.Contents("C:\Users\Bhushan\Desktop\Projects\AdventureWorks PBI Dashboard\Data\AdventureWorks Raw Data\Product Category Sales (Unpivot Demo).csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Product Category", type text}, {"North Region", Int64.Type}, {"Central Region", Int64.Type}, {"South Region", Int64.Type}}),
+		    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Changed Type", {"Date", "Product Category"}, "Attribute", "Value"),
+		    #"Pivoted Column" = Table.Pivot(#"Unpivoted Columns", List.Distinct(#"Unpivoted Columns"[Attribute]), "Attribute", "Value", List.Sum)
+		in
+		    #"Pivoted Column"
+	lineageTag: cd5cea0f-d158-433e-b6c9-3dc06a3299e5
+	queryGroup: 'Demo Queries'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Sample File' =
+		let
+		    Source = Folder.Files("C:\Users\Bhushan\Desktop\Projects\AdventureWorks PBI Dashboard\Data\AdventureWorks Raw Data\Sales Data"),
+		    Navigation1 = Source{0}[Content]
+		in
+		    Navigation1
+	lineageTag: 70f6bea5-162d-4526-8f7e-b9f0bf21bb90
+	queryGroup: 'Transform File from Sales Data\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression Parameter1 = #"Sample File" meta [IsParameterQuery=true, BinaryIdentifier=#"Sample File", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: c1ed0803-cc51-4743-8281-b346b909a44e
+	queryGroup: 'Transform File from Sales Data\Helper Queries'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transform Sample File' =
+		let
+		    Source = Csv.Document(Parameter1,[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"Promoted Headers"
+	lineageTag: 8dbd2749-4a59-455f-b188-9af2d9308227
+	queryGroup: 'Transform File from Sales Data'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transform File' =
+		let
+		    Source = (Parameter1 as binary) => let
+		        Source = Csv.Document(Parameter1,[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		        #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		    in
+		        #"Promoted Headers"
+		in
+		    Source
+	lineageTag: 3b6c78ca-78ea-4a8e-aaa7-6a873c8db5b3
+	queryGroup: 'Transform File from Sales Data\Helper Queries'
+
+	annotation PBI_ResultType = Function
+

@@ -1,0 +1,78 @@
+table 'Territory Lookup'
+	excludeFromModelRefresh
+	lineageTag: 1f687453-a807-4cf5-8389-665121c22c37
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 85cd3895-4ba1-495b-b259-4304d46e2ff6
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 30f6a6da-ecb8-4c7a-8c10-69ae036ab5eb
+		summarizeBy: none
+		sourceColumn: Region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 9b8acbc7-8907-46b9-9a6a-cfb85f37009d
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: ed3d0127-245b-4ae1-a573-bb861015c063
+		dataCategory: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Territory Hierarchy'
+		lineageTag: 602c3d78-1cc5-4066-9e7a-772362184823
+
+		level Continent
+			lineageTag: 4a4e5001-ecfb-4de9-93e0-3ef2a0221ea8
+			column: Continent
+
+		level Country
+			lineageTag: 679c351a-f272-4c83-8b02-ec98283a0639
+			column: Country
+
+		level Region
+			lineageTag: 60c22460-472d-4ac8-989f-bfc5ce17d5ac
+			column: Region
+
+	partition 'Territory Lookup' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Bhushan\Desktop\Projects\AdventureWorks PBI Dashboard\Data\AdventureWorks Raw Data\AdventureWorks Territory Lookup.csv"),[Delimiter=",", Columns=4, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SalesTerritoryKey", Int64.Type}, {"Region", type text}, {"Country", type text}, {"Continent", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
